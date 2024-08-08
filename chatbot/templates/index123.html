@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Assistant - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 20px;
+            font-weight: bold;
+            background-color: #8b4513;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 48px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .home {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .home button {
+            padding: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            width: 140px;
+        }
+
+        .home button:hover {
+            background-color: #5f0000;
+        }
+
+        .interaction-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .interaction-container img {
+            width: 150px;
+            height: 150px;
+            transition: all 2s ease;
+        }
+
+        .interaction-container .elderly {
+            position: absolute;
+            left: -150px;
+        }
+
+        .interaction-container .child {
+            position: absolute;
+            right: -150px;
+        }
+
+        .interaction-container .heart {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            color: #8b4513;
+            opacity: 0;
+            transition: opacity 2s ease;
+        }
+
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .interaction-container.connected .heart {
+            opacity: 1;
+        }
+
+        .interaction-container.connected .line-left {
+            x2: calc(50% - 150px);
+        }
+
+        .interaction-container.connected .line-right {
+            x1: calc(50% + 150px);
+        }
+
+        .interaction-container.close .elderly {
+            left: 10%;
+        }
+
+        .interaction-container.close .child {
+            right: 10%;
+        }
+
+        .message {
+            font-size: 1.5em;
+            color: #8b4513;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .message-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .share-btn {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            background: #d7ebf0;
+            border: 1px solid rgba(128, 128, 128, 0.705);
+            border-radius: 50%;
+            transition: 0.2s ease-in-out;
+            z-index: 10;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .share-btn:hover {
+            background: #f1f1f1;
+        }
+
+        .share-btn i {
+            font-size: 1.5em;
+            color: #6d8899;
+        }
+
+        .share-menu {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            bottom: 90px;
+            right: 30px;
+            transition: opacity 0.3s, visibility 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .share-menu.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            background-color: white;
+            color: #69718d;
+            border: 2px solid #69718d;
+            border-radius: 50%;
+            transition: transform 0.3s, background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .card:hover {
+            background-color: #aadce3;
+            transform: scale(1.1);
+        }
+
+        .card i {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Personal Assistant</h1>
+        </header>
+        <div class="main home">
+            <div class="interaction-container" id="interaction-container">
+                <img src="https://cdn-icons-png.flaticon.com/128/2922/2922506.png" alt="Elderly Person" class="elderly">
+                <svg height="2" width="100%">
+                    <line class="line-left" x1="150" y1="50%" x2="150" y2="50%"></line>
+                    <line class="line-right" x1="100%" y1="50%" x2="100%" y2="50%"></line>
+                </svg>
+                <i class="fas fa-heartbeat heart"></i>
+                <img src="https://cdn-icons-png.flaticon.com/128/2922/2922656.png" alt="Child" class="child">
+            </div>
+        </div>
+        <div class="message-container">
+            <p class="message">Connect through our app, no matter the distance.</p>
+        </div>
+    </div>
+    <div class="share-btn" tabindex="0">
+        <i class="fas fa-share-alt"></i>
+    </div>
+    <div class="share-menu">
+        <div class="card chatbot" onclick="window.location.href='/chatbot'">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="card record" onclick="window.location.href='/record'">
+            <i class="fas fa-microphone"></i>
+        </div>
+        <div class="card summary" onclick="window.location.href='/summary'">
+            <i class="fas fa-file-alt"></i>
+        </div>
+    </div>
+
+    <script>
+        function showContent() {
+            document.querySelector('.container').style.display = 'flex';
+
+            setTimeout(() => {
+                document.getElementById('interaction-container').classList.add('connected');
+            }, 1000);
+
+            setTimeout(() => {
+                document.getElementById('interaction-container').classList.add('close');
+            }, 2000);
+        }
+
+        setTimeout(showContent, 1000);
+
+        document.querySelector('.share-btn').addEventListener('click', function() {
+            document.querySelector('.share-menu').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Assistant - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px 20px;
+            font-weight: bold;
+            background-color: #8b4513;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 48px;
+        }
+
+        .menu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .menu .share-btn {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            background: #d7ebf0;
+            border: 1px solid rgba(128, 128, 128, 0.705);
+            border-radius: 50%;
+            transition: 0.2s ease-in-out;
+            z-index: 10;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .menu .share-btn:hover {
+            background: #f1f1f1;
+        }
+
+        .menu .share-btn i {
+            font-size: 1.5em;
+            color: #6d8899;
+        }
+
+        .menu .share-menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s, visibility 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .menu .share-menu.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu .share-menu .card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            background-color: white;
+            color: #69718d;
+            border: 2px solid #69718d;
+            border-radius: 50%;
+            transition: transform 0.3s, background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .menu .share-menu .card:hover {
+            background-color: #aadce3;
+            transform: scale(1.1);
+        }
+
+        .menu .share-menu .card i {
+            font-size: 1.5em;
+        }
+
+        .content {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .content .left-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .content .right-side {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .watch {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+        }
+
+        .watch .face {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            border: 10px solid #333;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+            animation: rotate 10s infinite linear;
+        }
+
+        .watch .band {
+            width: 100px;
+            height: 300px;
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .watch .icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            transform: translateZ(50px);
+        }
+
+        .watch .icons i {
+            font-size: 2em;
+            color: #333;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .message-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .message {
+            font-size: 1.5em;
+            color: #8b4513;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Personal Assistant</h1>
+    </header>
+    <div class="menu">
+        <div class="share-btn" tabindex="0">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <div class="share-menu">
+            <div class="card chatbot" onclick="window.location.href='/chatbot'">
+                <i class="fas fa-comments"></i>
+            </div>
+            <div class="card record" onclick="window.location.href='/record'">
+                <i class="fas fa-microphone"></i>
+            </div>
+            <div class="card summary" onclick="window.location.href='/summary'">
+                <i class="fas fa-file-alt"></i>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="left-side">
+            <div class="message-container">
+                <p class="message">Connect through our app, no matter the distance.</p>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="watch">
+                <div class="face">
+                    <div class="icons">
+                        <i class="fas fa-battery-full"></i>
+                        <i class="fas fa-wifi"></i>
+                        <i class="fas fa-heartbeat"></i>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+                <div class="band"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.share-btn').addEventListener('click', function() {
+            document.querySelector('.share-menu').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe4b5;
+        }
+
+        .aside {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+            max-width: 300px;
+            background: #fffaf0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .aside img {
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .aside h2 {
+            font-size: 2em;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .aside p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            max-width: 600px;
+            background: #fffaf0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #8b4513;
+            margin-bottom: 20px;
+        }
+
+        .chatbox {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            background-color: #fffaf0;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user {
+            align-items: flex-end;
+        }
+
+        .assistant {
+            align-items: flex-start;
+        }
+
+        .bubble {
+            max-width: 70%;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #e0e0e0;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+            word-wrap: break-word;
+        }
+
+        .user .bubble {
+            background-color: #8b0000;
+            color: white;
+        }
+
+        .assistant .bubble {
+            background-color: #ffd700;
+            color: black;
+        }
+
+        .sentiment {
+            font-size: 1em;
+            color: #f7f0f0;
+        }
+
+        .expression-bar {
+            position: relative;
+            height: 25px;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+
+        .expression-bar .fill {
+            height: 100%;
+        }
+
+        .positive {
+            background-color: rgb(244, 226, 68);
+        }
+
+        .negative {
+            background-color: rgb(143, 197, 255);
+        }
+
+        .neutral {
+            background-color: #999;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5f0000;
+        }
+
+        input[type="text"] {
+            padding: 15px;
+            font-size: 1.2em;
+            border: 1px solid #6b4c4c;
+            border-radius: 5px;
+            width: calc(100% - 32px);
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .input-container button {
+            flex: 0 0 auto;
+        }
+
+        .input-container input {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Assistant</h1>
+        <div class="chatbox" id="chatbox">
+            Chat messages will appear here -->
+        <!-- </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your message here">
+            <button id="submit-button">Submit</button>
+            <button id="start-button"><i class="fas fa-microphone"></i></button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submit-button').addEventListener('click', () => {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() !== '') {
+                processInput(userInput);
+                document.getElementById('user-input').value = '';
+            }
+        });
+
+        document.getElementById('start-button').addEventListener('click', startRecognition);
+
+        async function processInput(userInput) {
+            const response = await fetch('/process-input', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_input: userInput })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                const chatbox = document.getElementById('chatbox');
+
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.innerHTML = `
+                    <div class="bubble">
+                        <div> ${result.text}</div>
+                        <div class="expression-bar">
+                            <div class="fill ${getSentimentClass(result.score)}" style="width: ${result.magnitude * 100}%;"></div>
+                        </div>
+                        <div class="sentiment">Sentiment Score: ${result.score}</div>
+                        <div class="sentiment">Magnitude: ${result.magnitude}</div>
+                    </div>
+                `;
+                chatbox.appendChild(userMessage);
+
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message assistant';
+                botMessage.innerHTML = `<div class="bubble"> ${result.chatbot_response}</div>`;
+                chatbox.appendChild(botMessage);
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+            } else {
+                alert('Error: ' + result.error);
+            }
+        }
+
+        function getSentimentClass(score) {
+            if (score > 0) {
+                return 'positive';
+            } else if (score < 0) {
+                return 'negative';
+            } else {
+                return 'neutral';
+            }
+        }
+
+        async function startRecognition() {
+            const response = await fetch('/start-recognition', {
+                method: 'POST'
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                processInput(result.text);
+            } else {
+                alert('Error in speech recognition: ' + result.error);
+            }
+        }
+    </script>
+</body>
+</html> -->
+
+<!-- 
+.share-btn {
+    position: absolute;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    background: #d7ebf0;
+    border: 1px solid rgba(128, 128, 128, 0.705);
+    border-radius: 50%;
+    transition: 0.2s ease-in-out;
+    transform: scale(0.8); /* 使用 transform 替代 scale 屬性 */
+    z-index: 10;
+    padding: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.share-btn:hover {
+    background: #f1f1f1;
+    transform: scale(0.9); /* 使用 transform 屬性 */
+}
+
+.up {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.discord {
+    margin-top: -0.9em;
+    margin-left: -1.2em;
+    fill: #8c9eff; /* 修正為 fill: #8c9eff; */
+}
+
+.card1:hover {
+    cursor: pointer;
+    transform: scale(1.1); /* 使用 transform 屬性 */
+    background-color: #cc39a4;
+}
+
+.card1:hover .instagram {
+    fill: white;
+}
+
+.card2:hover .twitter {
+    fill: white; /* 修正拼寫錯誤 */
+} -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffe4b5;
+        }
+
+        .aside {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 25%;
+            max-width: 300px;
+            background: #fffaf0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-right: 20px;
+            text-align: center;
+        }
+
+        .aside img {
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .aside h2 {
+            font-size: 2em;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .aside p {
+            font-size: 1.2em;
+            color: #555;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            max-width: 600px;
+            background: #fffaf0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #8b4513;
+            margin-bottom: 20px;
+        }
+
+        .chatbox {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #ddd;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            background-color: #fffaf0;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user {
+            align-items: flex-end;
+        }
+
+        .assistant {
+            align-items: flex-start;
+        }
+
+        .bubble {
+            max-width: 70%;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #e0e0e0;
+            margin-bottom: 5px;
+            font-size: 1.2em;
+            word-wrap: break-word;
+        }
+
+        .user .bubble {
+            background-color: #8b0000;
+            color: white;
+        }
+
+        .assistant .bubble {
+            background-color: #ffd700;
+            color: black;
+        }
+
+        .sentiment {
+            font-size: 1em;
+            color: #f7f0f0;
+        }
+
+        .expression-bar {
+            position: relative;
+            height: 25px;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            margin: 5px 0;
+            overflow: hidden;
+        }
+
+        .expression-bar .fill {
+            height: 100%;
+        }
+
+        .positive {
+            background-color: rgb(244, 226, 68);
+        }
+
+        .negative {
+            background-color: rgb(143, 197, 255);
+        }
+
+        .neutral {
+            background-color: #999;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5f0000;
+        }
+
+        input[type="text"] {
+            padding: 15px;
+            font-size: 1.2em;
+            border: 1px solid #6b4c4c;
+            border-radius: 5px;
+            width: calc(100% - 32px);
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .input-container button {
+            flex: 0 0 auto;
+        }
+
+        .input-container input {
+            flex: 1;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffebcd;
+            border-radius: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Assistant</h1>
+        <div class="chatbox" id="chatbox">
+            Chat messages will appear here -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your message here">
+            <button id="submit-button">Submit</button>
+            <button id="start-button"><i class="fas fa-microphone"></i></button>
+        </div>
+        <div class="summary">
+            <button id="summary-button">Summarize</button>
+        </div>
+        <div class="summary-content" id="summary-content">
+            Summary will appear here
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submit-button').addEventListener('click', () => {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() !== '') {
+                processInput(userInput);
+                document.getElementById('user-input').value = '';
+            }
+        });
+
+        document.getElementById('start-button').addEventListener('click', startRecognition);
+        document.getElementById('summary-button').addEventListener('click', summarizeConversation);
+
+        async function processInput(userInput) {
+            const response = await fetch('/process-input', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_input: userInput })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                const chatbox = document.getElementById('chatbox');
+
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.innerHTML = `
+                    <div class="bubble">
+                        <div>${result.text}</div>
+                        <div class="expression-bar">
+                            <div class="fill ${getSentimentClass(result.score)}" style="width: ${result.magnitude * 100}%;"></div>
+                        </div>
+                        <div class="sentiment">Sentiment Score: ${result.score}</div>
+                        <div class="sentiment">Magnitude: ${result.magnitude}</div>
+                    </div>
+                `;
+                chatbox.appendChild(userMessage);
+
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message assistant';
+                botMessage.innerHTML = `<div class="bubble">${result.chatbot_response}</div>`;
+                chatbox.appendChild(botMessage);
+
+                chatbox.scrollTop = chatbox.scrollHeight;
+            } else {
+                alert('Error: ' + result.error);
+            }
+        }
+
+        function getSentimentClass(score) {
+            if (score > 0) {
+                return 'positive';
+            } else if (score < 0) {
+                return 'negative';
+            } else {
+                return 'neutral';
+            }
+        }
+
+        async function startRecognition() {
+            const response = await fetch('/start-recognition', {
+                method: 'POST'
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                processInput(result.text);
+            } else {
+                alert('Error in speech recognition: ' + result.error);
+            }
+        }
+
+        async function summarizeConversation() {
+            const response = await fetch('/summarize-conversation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                const summaryContent = document.getElementById('summary-content');
+                summaryContent.innerHTML = `<h2>Summary:</h2><p>${result.summary}</p>`;
+            } else {
+                alert('Error: ' + result.error);
+            }
+        }
+    </script>
+</body>
+</html>

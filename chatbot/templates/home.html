@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherished Link - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f093fb 100%);
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            position: relative;
+        }
+
+        .person {
+            width: 180px;
+            height: 180px;
+        }
+
+        .elderly {
+            position: absolute;
+            left: 10%;
+            transition: left 2s ease;
+        }
+
+        .child {
+            position: absolute;
+            right: 10%;
+            transition: right 2s ease;
+        }
+
+        .heart {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 5em;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .line {
+            position: absolute;
+            height: 4px;
+            background-color: #fff;
+            top: 50%;
+            width: 0;
+            transition: width 2s ease;
+        }
+
+        .line-left {
+            left: calc(50% - 75px);
+        }
+
+        .line-right {
+            right: calc(50% - 75px);
+        }
+
+        .connected .heart {
+            opacity: 1;
+        }
+
+        .extend .line-left {
+            width: calc(40% - 75px);
+        }
+
+        .extend .line-right {
+            width: calc(40% - 75px);
+        }
+
+        .close .elderly {
+            left: 35%;
+        }
+
+        .close .child {
+            right: 35%;
+        }
+
+        .close .line-left {
+            width: calc(15% - 75px);
+            left: calc(35% + 75px);
+        }
+
+        .close .line-right {
+            width: calc(15% - 75px);
+            right: calc(35% + 75px);
+        }
+
+        .start-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #ff7e5f;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            display: none;
+        }
+
+        .start-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cdn-icons-png.flaticon.com/128/2922/2922506.png" alt="Elderly Person" class="person elderly" style="z-index: 10;">
+        <div class="line line-left"  style="z-index: 5;"></div>
+        <i class="fas fa-heartbeat heart" style="z-index: 5;"></i>
+        <div class="line line-right"  style="z-index: 5;"></div>
+        <img src="https://cdn-icons-png.flaticon.com/128/2922/2922656.png" alt="Child" class="person child" style="z-index: 10;">
+    </div>
+    <button class="start-btn" onclick="startApp()">Start</button>
+
+    <script>
+        function showContent() {
+            document.querySelector('.container').classList.add('connected');
+
+            setTimeout(() => {
+                document.querySelector('.container').classList.add('extend');
+            }, 1000);
+
+            setTimeout(() => {
+                document.querySelector('.container').classList.add('close');
+                document.querySelector('.start-btn').style.display = 'block';
+            }, 3000);
+        }
+
+        function startApp() {
+            window.location.href = '/index';
+        }
+
+        setTimeout(showContent, 1000);
+    </script>
+</body>
+</html>

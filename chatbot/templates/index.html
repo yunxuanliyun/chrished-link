@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cherished Link - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 50%, #f093fb 100%);
+            color: #fff;
+        }
+
+        header {
+            position: absolute;
+            top: 48%;
+            left: 10%;
+            transform: translateY(-30%);
+            font-weight: bold;
+        }
+
+        header h1 {
+            font-size: 90px;
+            margin: 0;
+        }
+
+        .menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu .share-btn {
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            background: #16213e;
+            border: 1px solid rgba(128, 128, 128, 0.705);
+            border-radius: 50%;
+            transition: 0.2s ease-in-out;
+            z-index: 10;
+            padding: 10px;
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+        }
+
+        .menu .share-btn:hover {
+            background: #0f3460;
+        }
+
+        .menu .share-btn i {
+            font-size: 1.5em;
+            color: #e94560;
+        }
+
+        .menu .share-menu {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            transition: transform 0.3s ease, opacity 0.3s, visibility 0.3s;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(50px);
+        }
+
+        .menu .share-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .menu .share-menu .card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            background-color: #0f3460;
+            color: #fff;
+            border: 2px solid #e94560;
+            border-radius: 50%;
+            transition: transform 0.3s, background-color 0.3s;
+            margin-left: 10px;
+        }
+
+        .menu .share-menu .card:hover {
+            background-color: #e94560;
+            transform: scale(1.1);
+        }
+
+        .menu .share-menu .card img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%; /* 如果想要图片也有圆角效果 */
+        }
+
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            padding: 0 20px;
+        }
+
+        .logo-container {
+            position: absolute;
+            bottom: 50px;
+            right: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-65%);
+        }
+
+        .logo {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            background: url('https://cdn-icons-png.flaticon.com/128/472/472506.png') no-repeat center center;
+            background-size: contain;
+            animation: rotate 10s infinite linear;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotateY(0deg);
+            }
+            to {
+                transform: rotateY(360deg);
+            }
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cherished Link</h1>
+        <p class="message">Smart connections for heartfelt moments,<br> bringing you closer to your family even when miles apart.</p>
+    </header>
+
+    <div class="menu">
+        <div class="share-menu">
+            <div class="card chatbot" onclick="window.location.href='/chatbot'">
+                <img src="https://cdn-icons-png.flaticon.com/128/2593/2593635.png" alt="Chatbot">
+            </div>
+            <div class="card record" onclick="window.location.href='/record'">
+                <img src="https://cdn-icons-png.flaticon.com/128/1156/1156975.png" alt="Record">
+            </div>
+            <div class="card summary" onclick="window.location.href='/summary'">
+                <img src="https://cdn-icons-png.flaticon.com/128/3093/3093795.png" alt="Summary">
+            </div>
+        </div>
+        <div class="share-btn" onclick="toggleMenu()">
+            <i class="fas fa-share-alt"></i>
+        </div>
+    </div>
+
+    <div class="logo-container">
+        <div class="logo"></div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.share-menu').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
